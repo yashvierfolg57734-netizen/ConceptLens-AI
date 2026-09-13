@@ -1,0 +1,2372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Practice | ConceptLens AI</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #FBFAF7;
+            color: #302B3A;
+            min-height: 100vh;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        nav {
+            height: 74px;
+            padding: 0 6%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(255,255,255,0.92);
+            border-bottom: 1px solid #E6D6E7;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(12px);
+        }
+
+        .logo {
+            text-decoration: none;
+            color: #302B3A;
+            font-size: 22px;
+            font-weight: 800;
+        }
+
+        .logo span {
+            color: #8B6B91;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .selection {
+            background: #E6D6F7;
+            color: #6D587C;
+            padding: 9px 15px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .back-link {
+            text-decoration: none;
+            color: #302B3A;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        /* ================= PAGE ================= */
+
+        .page {
+            width: min(1100px, 92%);
+            margin: auto;
+            padding: 40px 0 70px;
+        }
+
+        .breadcrumb {
+            font-size: 13px;
+            color: #77717F;
+            margin-bottom: 17px;
+        }
+
+        .breadcrumb strong {
+            color: #6D587C;
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+            padding: 43px;
+            border-radius: 30px;
+            background:
+                linear-gradient(
+                    135deg,
+                    #E6D6F7 0%,
+                    #E6D6E7 48%,
+                    #FEF3B0 100%
+                );
+            border: 1px solid rgba(139,107,145,0.12);
+            margin-bottom: 25px;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            width: 190px;
+            height: 190px;
+            border-radius: 50%;
+            background: #D6EAD4;
+            right: -65px;
+            bottom: -85px;
+            opacity: 0.7;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 720px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #FFFFFF;
+            padding: 8px 14px;
+            border-radius: 30px;
+            color: #6D587C;
+            font-size: 12px;
+            font-weight: 800;
+            margin-bottom: 17px;
+        }
+
+        .badge-dot {
+            width: 8px;
+            height: 8px;
+            background: #A77CC5;
+            border-radius: 50%;
+        }
+
+        .hero h1 {
+            font-size: clamp(35px, 5vw, 54px);
+            line-height: 1.05;
+            letter-spacing: -1.7px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 span {
+            color: #8B6B91;
+        }
+
+        .hero p {
+            max-width: 700px;
+            line-height: 1.7;
+            color: #5F5867;
+            font-size: 16px;
+        }
+
+        /* ================= PRACTICE MODES ================= */
+
+        .mode-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+            margin-bottom: 25px;
+        }
+
+        .mode {
+            min-height: 105px;
+            padding: 18px;
+            border-radius: 20px;
+            border: 1px solid rgba(48,43,58,0.06);
+        }
+
+        .mode:nth-child(1) {
+            background: #D6EAD4;
+        }
+
+        .mode:nth-child(2) {
+            background: #FFD6A5;
+        }
+
+        .mode:nth-child(3) {
+            background: #E6D6F7;
+        }
+
+        .mode:nth-child(4) {
+            background: #FEF3B0;
+        }
+
+        .mode-icon {
+            font-size: 21px;
+            margin-bottom: 8px;
+        }
+
+        .mode h3 {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .mode p {
+            font-size: 12px;
+            line-height: 1.45;
+            color: #716A77;
+        }
+
+        /* ================= PROGRESS ================= */
+
+        .progress-card {
+            background: #FFFFFF;
+            border: 1px solid #E6D6E7;
+            border-radius: 20px;
+            padding: 18px 21px;
+            margin-bottom: 24px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 13px;
+        }
+
+        .progress-info span {
+            color: #77717F;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #E6D6E7;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 25%;
+            background: linear-gradient(90deg, #A77CC5, #8B6B91);
+            transition: 0.4s ease;
+        }
+
+        /* ================= QUESTION ================= */
+
+        .question-card {
+            background: #FFFFFF;
+            border: 1px solid #E6D6E7;
+            border-radius: 28px;
+            padding: 34px;
+            box-shadow: 0 12px 35px rgba(48,43,58,0.06);
+        }
+
+        .question-meta {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .tag {
+            padding: 7px 11px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 800;
+        }
+
+        .tag-pyq {
+            background: #FFD6A5;
+        }
+
+        .tag-important {
+            background: #FEF3B0;
+        }
+
+        .tag-interview {
+            background: #E6D6F7;
+        }
+
+        .tag-practice {
+            background: #D6EAD4;
+        }
+
+        .difficulty {
+            margin-left: auto;
+            font-size: 12px;
+            color: #77717F;
+        }
+
+        .question-number {
+            font-size: 12px;
+            font-weight: 800;
+            color: #8B6B91;
+            margin-bottom: 8px;
+        }
+
+        .question-card h2 {
+            font-size: clamp(22px, 3vw, 30px);
+            line-height: 1.3;
+            margin-bottom: 14px;
+        }
+
+        .description {
+            color: #625B69;
+            line-height: 1.75;
+            margin-bottom: 25px;
+        }
+
+        /* ================= CODE EDITOR ================= */
+
+        .coding-area {
+            display: none;
+        }
+
+        .coding-area.active {
+            display: block;
+        }
+
+        .editor-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 9px;
+        }
+
+        .editor-header strong {
+            font-size: 14px;
+        }
+
+        .language {
+            border: none;
+            background: #E6D6F7;
+            color: #6D587C;
+            padding: 8px 12px;
+            border-radius: 9px;
+            font-weight: 700;
+            outline: none;
+        }
+
+        .code-editor {
+            width: 100%;
+            min-height: 280px;
+            resize: vertical;
+            border: none;
+            outline: none;
+            border-radius: 17px;
+            background: #302B3A;
+            color: #FFFFFF;
+            padding: 20px;
+            font-family: "SFMono-Regular", Consolas, monospace;
+            font-size: 14px;
+            line-height: 1.65;
+        }
+
+        .code-editor::placeholder {
+            color: #AFA8B5;
+        }
+
+        /* ================= TEST CASES ================= */
+
+        .test-cases {
+            margin-top: 17px;
+            padding: 17px;
+            background: #FBFAF7;
+            border: 1px solid #E6D6E7;
+            border-radius: 16px;
+        }
+
+        .test-cases h4 {
+            font-size: 13px;
+            margin-bottom: 11px;
+        }
+
+        .test {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 9px 0;
+            border-bottom: 1px solid #E6D6E7;
+            font-size: 12px;
+        }
+
+        .test:last-child {
+            border-bottom: none;
+        }
+
+        .test span {
+            color: #77717F;
+        }
+
+        /* ================= OUTPUT ================= */
+
+        .output {
+            display: none;
+            margin-top: 16px;
+            padding: 17px;
+            border-radius: 16px;
+            background: #D6EAD4;
+            color: #405840;
+            font-size: 13px;
+            line-height: 1.65;
+        }
+
+        .output.error {
+            background: #FFD6A5;
+            color: #684A2C;
+        }
+
+        /* ================= WRITTEN ANSWER ================= */
+
+        .written-area {
+            margin-top: 5px;
+        }
+
+        .written-area label {
+            display: block;
+            font-size: 14px;
+            font-weight: 800;
+            margin-bottom: 9px;
+        }
+
+        .answer-box {
+            width: 100%;
+            min-height: 190px;
+            resize: vertical;
+            padding: 17px;
+            border: 1px solid #DDD5E1;
+            border-radius: 16px;
+            background: #FBFAF7;
+            color: #302B3A;
+            outline: none;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .answer-box:focus {
+            border-color: #A77CC5;
+            box-shadow: 0 0 0 4px rgba(167,124,197,0.12);
+        }
+
+        /* ================= BUTTONS ================= */
+
+        .actions {
+            display: flex;
+            gap: 11px;
+            flex-wrap: wrap;
+            margin-top: 18px;
+        }
+
+        button {
+            border: none;
+            cursor: pointer;
+            border-radius: 13px;
+            padding: 13px 18px;
+            font-size: 13px;
+            font-weight: 800;
+            transition: 0.2s ease;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+        }
+
+        .primary {
+            background: #8B6B91;
+            color: #FFFFFF;
+        }
+
+        .run {
+            background: #D6EAD4;
+            color: #405840;
+        }
+
+        .hint {
+            background: #FEF3B0;
+            color: #685F22;
+        }
+
+        .solution {
+            background: #FFD6A5;
+            color: #684A2C;
+            display: none;
+        }
+
+        /* ================= HINT ================= */
+
+        .hint-box {
+            display: none;
+            margin-top: 17px;
+            padding: 19px;
+            background: #FEF3B0;
+            border-radius: 16px;
+            color: #5F5722;
+            line-height: 1.7;
+            font-size: 13px;
+        }
+
+        .hint-step {
+            margin-top: 9px;
+        }
+
+        /* ================= AI REVIEW ================= */
+
+        .ai-review {
+            display: none;
+            margin-top: 25px;
+            padding: 26px;
+            border-radius: 23px;
+            background: linear-gradient(
+                135deg,
+                #E6D6F7,
+                #E6D6E7
+            );
+            border: 1px solid rgba(139,107,145,0.12);
+        }
+
+        .ai-heading {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            margin-bottom: 18px;
+        }
+
+        .ai-icon {
+            width: 40px;
+            height: 40px;
+            display: grid;
+            place-items: center;
+            background: #FFFFFF;
+            border-radius: 12px;
+            font-size: 20px;
+        }
+
+        .ai-heading h3 {
+            font-size: 17px;
+        }
+
+        .review-block {
+            background: rgba(255,255,255,0.72);
+            border-radius: 16px;
+            padding: 16px;
+            margin-top: 11px;
+        }
+
+        .review-block h4 {
+            font-size: 12px;
+            margin-bottom: 7px;
+        }
+
+        .review-block p {
+            color: #5E5765;
+            line-height: 1.65;
+            font-size: 13px;
+        }
+
+        .correct {
+            background: #D6EAD4;
+        }
+
+        .error-block {
+            background: #FFD6A5;
+        }
+
+        .concept-block {
+            background: #FEF3B0;
+        }
+
+        /* ================= SOLUTION ================= */
+
+        .solution-box {
+            display: none;
+            margin-top: 16px;
+            padding: 18px;
+            border-radius: 17px;
+            background: #302B3A;
+            color: #FFFFFF;
+        }
+
+        .solution-box h4 {
+            margin-bottom: 12px;
+            color: #FEF3B0;
+        }
+
+        .solution-code {
+            white-space: pre-wrap;
+            font-family: "SFMono-Regular", Consolas, monospace;
+            font-size: 13px;
+            line-height: 1.65;
+        }
+
+        .solution-explanation {
+            margin-top: 14px;
+            color: #DAD4DE;
+            line-height: 1.6;
+            font-size: 13px;
+        }
+
+        /* ================= NEXT ================= */
+
+        .next-box {
+            display: none;
+            margin-top: 22px;
+            padding: 19px;
+            border-radius: 17px;
+            background: #E6D6F7;
+            color: #51485B;
+            cursor: pointer;
+        }
+
+        .next-box strong {
+            display: block;
+            margin-bottom: 5px;
+            color: #6D587C;
+        }
+
+        /* ================= FINAL INSIGHT ================= */
+
+        .final-insight {
+            display: none;
+            margin-top: 25px;
+            padding: 28px;
+            border-radius: 24px;
+            background:
+                linear-gradient(
+                    135deg,
+                    #D6EAD4,
+                    #E6D6F7,
+                    #FEF3B0
+                );
+        }
+
+        .final-insight h2 {
+            margin-bottom: 10px;
+        }
+
+        .final-insight p {
+            color: #5D5664;
+            line-height: 1.7;
+            font-size: 14px;
+        }
+
+        .focus {
+            margin-top: 17px;
+            padding: 16px;
+            background: rgba(255,255,255,0.72);
+            border-radius: 15px;
+        }
+
+        .focus strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 800px) {
+            .mode-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .hero {
+                padding: 31px;
+            }
+
+            .question-card {
+                padding: 25px;
+            }
+        }
+
+        @media (max-width: 550px) {
+            .selection {
+                display: none;
+            }
+
+            .mode-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .difficulty {
+                width: 100%;
+                margin-left: 0;
+            }
+
+            .hero {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<nav>
+
+    <a href="index.html" class="logo">
+        ConceptLens <span>AI</span>
+    </a>
+
+    <div class="nav-right">
+
+        <div class="selection" id="selectionText">
+            Loading...
+        </div>
+
+        <a href="learn.html" class="back-link">
+            ← Back to Learning
+        </a>
+
+    </div>
+
+</nav>
+
+
+<main class="page">
+
+    <div class="breadcrumb">
+        ConceptLens AI /
+        <strong id="subjectName">Subject</strong> /
+        <strong id="conceptName">Concept</strong> /
+        Practice
+    </div>
+
+
+    <!-- ================= HERO ================= -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <div class="badge">
+                <span class="badge-dot"></span>
+                Intelligent Practice
+            </div>
+
+            <h1>
+                Practice the
+                <span>concept.</span>
+            </h1>
+
+            <p>
+                Solve real problems, write your own solution, test your
+                thinking, and receive clear feedback on what you understood,
+                where your logic went wrong, and what you should improve.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= MODES ================= -->
+
+    <section class="mode-grid">
+
+        <div class="mode">
+            <div class="mode-icon">💻</div>
+            <h3>Code & Solve</h3>
+            <p>Write your own solution and test your logic.</p>
+        </div>
+
+        <div class="mode">
+            <div class="mode-icon">📚</div>
+            <h3>PYQs & Important</h3>
+            <p>Practice high-value engineering questions.</p>
+        </div>
+
+        <div class="mode">
+            <div class="mode-icon">🤖</div>
+            <h3>AI Understanding</h3>
+            <p>Get feedback based on your actual response.</p>
+        </div>
+
+        <div class="mode">
+            <div class="mode-icon">🎯</div>
+            <h3>Personalized</h3>
+            <p>Your next problem targets your weak area.</p>
+        </div>
+
+    </section>
+
+
+    <!-- ================= PROGRESS ================= -->
+
+    <section class="progress-card">
+
+        <div class="progress-info">
+            <strong>Practice session</strong>
+            <span id="progressText">
+                Question 1 of 4
+            </span>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+    </section>
+
+
+    <!-- ================= QUESTION CARD ================= -->
+
+    <section class="question-card">
+
+        <div class="question-meta">
+
+            <span class="tag tag-practice" id="questionType">
+                CONCEPT PRACTICE
+            </span>
+
+            <span class="difficulty" id="difficulty">
+                Difficulty: Medium
+            </span>
+
+        </div>
+
+
+        <div class="question-number" id="questionNumber">
+            QUESTION 01
+        </div>
+
+
+        <h2 id="questionTitle">
+            Loading question...
+        </h2>
+
+
+        <p class="description" id="questionDescription">
+            Preparing your problem...
+        </p>
+
+
+        <!-- ================= CODING ================= -->
+
+        <div class="coding-area" id="codingArea">
+
+            <div class="editor-header">
+
+                <strong>Write your solution</strong>
+
+                <select class="language" id="language">
+                    <option>JavaScript</option>
+                    <option>Python</option>
+                    <option>Java</option>
+                    <option>C++</option>
+                </select>
+
+            </div>
+
+
+            <textarea
+                class="code-editor"
+                id="codeEditor"
+                placeholder="// Write your solution here...
+// Think about the logic before coding."
+            ></textarea>
+
+
+            <div class="test-cases">
+
+                <h4>Example test cases</h4>
+
+                <div class="test">
+                    <strong>Input</strong>
+                    <span id="testInput">[4, 8, 2, 9, 1]</span>
+                </div>
+
+                <div class="test">
+                    <strong>Expected Output</strong>
+                    <span id="testOutput">9</span>
+                </div>
+
+            </div>
+
+
+            <div class="actions">
+
+                <button
+                    class="run"
+                    onclick="runCode()"
+                >
+                    ▶ Run Code
+                </button>
+
+                <button
+                    class="hint"
+                    onclick="showHint()"
+                >
+                    💡 Hint
+                </button>
+
+                <button
+                    class="primary"
+                    onclick="reviewCode()"
+                >
+                    🤖 Analyze My Code
+                </button>
+
+                <button
+                    class="solution"
+                    id="solutionButton"
+                    onclick="showSolution()"
+                >
+                    Show Correct Solution
+                </button>
+
+            </div>
+
+
+            <div
+                class="output"
+                id="codeOutput"
+            ></div>
+
+        </div>
+
+
+        <!-- ================= THEORY ================= -->
+
+        <div
+            class="written-area"
+            id="writtenArea"
+        >
+
+            <label for="answerBox">
+                Write your answer in your own words
+            </label>
+
+            <textarea
+                class="answer-box"
+                id="answerBox"
+                placeholder="Explain your answer clearly. You don't need to use textbook language."
+            ></textarea>
+
+            <div class="actions">
+
+                <button
+                    class="hint"
+                    onclick="showHint()"
+                >
+                    💡 Hint
+                </button>
+
+                <button
+                    class="primary"
+                    onclick="reviewAnswer()"
+                >
+                    🤖 Analyze My Answer
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= HINT ================= -->
+
+        <div
+            class="hint-box"
+            id="hintBox"
+        >
+
+            <strong>💡 ConceptLens Hint</strong>
+
+            <div
+                class="hint-step"
+                id="hintText"
+            >
+                Think about the main operation required to solve the problem.
+            </div>
+
+        </div>
+
+
+        <!-- ================= AI REVIEW ================= -->
+
+        <div
+            class="ai-review"
+            id="aiReview"
+        >
+
+            <div class="ai-heading">
+
+                <div class="ai-icon">
+                    🤖
+                </div>
+
+                <h3>
+                    ConceptLens AI Analysis
+                </h3>
+
+            </div>
+
+
+            <div class="review-block correct">
+
+                <h4>
+                    ✓ What you understood
+                </h4>
+
+                <p id="understoodText">
+                    Analyzing your understanding...
+                </p>
+
+            </div>
+
+
+            <div class="review-block error-block">
+
+                <h4>
+                    ❌ What needs improvement
+                </h4>
+
+                <p id="errorText">
+                    Analyzing your solution...
+                </p>
+
+            </div>
+
+
+            <div class="review-block concept-block">
+
+                <h4>
+                    🧠 Concept to focus on
+                </h4>
+
+                <p id="conceptText">
+                    Identifying the concept...
+                </p>
+
+            </div>
+
+
+            <div class="review-block">
+
+                <h4>
+                    🔧 How to improve
+                </h4>
+
+                <p id="improveText">
+                    Preparing your recommendation...
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= SOLUTION ================= -->
+
+        <div
+            class="solution-box"
+            id="solutionBox"
+        >
+
+            <h4>
+                🔓 Correct Solution
+            </h4>
+
+            <div
+                class="solution-code"
+                id="solutionCode"
+            ></div>
+
+            <div
+                class="solution-explanation"
+                id="solutionExplanation"
+            ></div>
+
+        </div>
+
+
+        <!-- ================= NEXT ================= -->
+
+        <div
+            class="next-box"
+            id="nextBox"
+            onclick="nextQuestion()"
+        >
+
+            <strong>
+                Next recommended problem →
+            </strong>
+
+            <span id="nextText">
+                Continue practicing the concept.
+            </span>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FINAL INSIGHT ================= -->
+
+    <section
+        class="final-insight"
+        id="finalInsight"
+    >
+
+        <h2>
+            🧠 Your ConceptLens Insight
+        </h2>
+
+        <p id="finalText">
+            Your practice session is complete.
+        </p>
+
+        <div class="focus">
+
+            <strong>
+                🎯 Recommended focus
+            </strong>
+
+            <span id="focusText">
+                Continue applying the concept to new problems.
+            </span>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<script>
+
+    /* =========================================================
+       1. GET DASHBOARD SELECTION
+    ========================================================= */
+
+    const selection =
+        JSON.parse(
+            localStorage.getItem("conceptLensSelection")
+        ) || {
+            branch: "CSE",
+            subject: "Data Structures & Algorithms",
+            concept: "Arrays"
+        };
+
+    const branch = selection.branch;
+    const subject = selection.subject;
+    const concept = selection.concept;
+
+
+    document.getElementById("subjectName").textContent =
+        subject;
+
+    document.getElementById("conceptName").textContent =
+        concept;
+
+    document.getElementById("selectionText").textContent =
+        `${subject} • ${concept}`;
+
+
+    /* =========================================================
+       2. CODING DETECTION
+    ========================================================= */
+
+    const codingSubjects = [
+        "Data Structures & Algorithms",
+        "OOP",
+        "Object-Oriented Programming",
+        "Programming",
+        "Python",
+        "Java",
+        "C++",
+        "Web Technologies",
+        "Machine Learning"
+    ];
+
+    const codingConcepts = [
+        "Arrays",
+        "Strings",
+        "Linked Lists",
+        "Stacks & Queues",
+        "Trees",
+        "Graphs",
+        "Sorting",
+        "Searching",
+        "Recursion",
+        "Dynamic Programming",
+        "SQL",
+        "JavaScript",
+        "Python",
+        "Machine Learning"
+    ];
+
+
+    function isCoding() {
+
+        const subjectIsCoding =
+            codingSubjects.some(item =>
+                subject.toLowerCase()
+                    .includes(item.toLowerCase())
+            );
+
+        const conceptIsCoding =
+            codingConcepts.some(item =>
+                concept.toLowerCase()
+                    .includes(item.toLowerCase())
+            );
+
+        return subjectIsCoding || conceptIsCoding;
+    }
+
+
+    const codingMode = isCoding();
+
+
+    if (codingMode) {
+
+        document.getElementById("codingArea")
+            .classList.add("active");
+
+        document.getElementById("writtenArea")
+            .style.display = "none";
+
+    }
+
+
+    /* =========================================================
+       3. QUESTION BANK
+    ========================================================= */
+
+    const codingQuestions = {
+
+        "Arrays": [
+
+            {
+                type: "IMPORTANT",
+                difficulty: "Easy",
+
+                title:
+                    "Find the largest element in an array",
+
+                description:
+                    "Given an array nums containing N numbers, write a program to find the largest element. Do not use a built-in maximum function.",
+
+                input:
+                    "[4, 8, 2, 9, 1]",
+
+                output:
+                    "9",
+
+                hint:
+                    "Think of one variable called largest. Start by storing one array element in it. Then compare every remaining element with largest. If nums[i] is greater than largest, which variable should be updated?",
+
+                understood:
+                    "You understand that the array must be traversed and that a value must be maintained to remember the largest element found so far.",
+
+                error:
+                    "If your code changes nums[i] instead of updating largest, the logic is reversed. The array element should be compared with largest, and largest should receive nums[i] when a larger value is found.",
+
+                concept:
+                    "Tracking a value while traversing an array.",
+
+                improve:
+                    "Focus on the difference between reading a value from the array and updating the variable that stores your current answer.",
+
+                solution:
+`let largest = nums[0];
+
+for (let i = 1; i < nums.length; i++) {
+    if (nums[i] > largest) {
+        largest = nums[i];
+    }
+}
+
+return largest;`,
+
+                explanation:
+                    "largest stores the biggest value found so far. Every new element is compared with it. If the new element is bigger, largest is updated."
+            },
+
+
+            {
+                type: "INTERVIEW STYLE",
+                difficulty: "Medium",
+
+                title:
+                    "Find the second largest element",
+
+                description:
+                    "Given an array of numbers, find the second largest distinct element without sorting the entire array.",
+
+                input:
+                    "[10, 5, 8, 10, 3]",
+
+                output:
+                    "8",
+
+                hint:
+                    "Instead of sorting, try maintaining two variables: one for the largest value and one for the second largest value.",
+
+                understood:
+                    "You understand array traversal and comparison between elements.",
+
+                error:
+                    "Be careful when the largest value appears more than once. The problem asks for the second largest distinct value.",
+
+                concept:
+                    "Maintaining multiple pieces of information during one traversal.",
+
+                improve:
+                    "Think carefully about how largest and secondLargest should change when a new value is encountered.",
+
+                solution:
+`let largest = -Infinity;
+let secondLargest = -Infinity;
+
+for (let i = 0; i < nums.length; i++) {
+
+    if (nums[i] > largest) {
+        secondLargest = largest;
+        largest = nums[i];
+    }
+
+    else if (
+        nums[i] > secondLargest &&
+        nums[i] !== largest
+    ) {
+        secondLargest = nums[i];
+    }
+}
+
+return secondLargest;`,
+
+                explanation:
+                    "The algorithm maintains the two largest distinct values without sorting, giving O(N) time."
+            },
+
+
+            {
+                type: "CONCEPT PRACTICE",
+                difficulty: "Medium",
+
+                title:
+                    "Find the missing number",
+
+                description:
+                    "An array contains numbers from 1 to N, but exactly one number is missing. Find the missing number efficiently.",
+
+                input:
+                    "[1, 2, 4, 5]",
+
+                output:
+                    "3",
+
+                hint:
+                    "First think about what the sum of all numbers from 1 to N should be. Then compare it with the sum of the numbers actually present.",
+
+                understood:
+                    "You understand that the expected collection of numbers can be compared with the values present in the array.",
+
+                error:
+                    "Make sure the expected range includes every number from 1 through N and that your calculation uses the correct value of N.",
+
+                concept:
+                    "Using mathematical reasoning to optimize an array problem.",
+
+                improve:
+                    "Focus on choosing an approach that avoids unnecessary nested loops.",
+
+                solution:
+`let expected = n * (n + 1) / 2;
+
+let actual = 0;
+
+for (let i = 0; i < nums.length; i++) {
+    actual += nums[i];
+}
+
+return expected - actual;`,
+
+                explanation:
+                    "The difference between the expected sum and the actual sum gives the missing number."
+            },
+
+
+            {
+                type: "CHALLENGE",
+                difficulty: "Hard",
+
+                title:
+                    "Maximum subarray sum",
+
+                description:
+                    "Find the contiguous subarray with the largest possible sum. Return the maximum sum.",
+
+                input:
+                    "[-2, 1, -3, 4, -1, 2, 1, -5, 4]",
+
+                output:
+                    "6",
+
+                hint:
+                    "Keep a running sum. Ask yourself whether carrying a negative sum into the next element can ever help.",
+
+                understood:
+                    "You understand the idea of examining contiguous portions of an array.",
+
+                error:
+                    "If you restart your calculation incorrectly, you may lose a potentially better subarray. The key is deciding when the current running sum should be discarded.",
+
+                concept:
+                    "Kadane's algorithm and dynamic programming reasoning.",
+
+                improve:
+                    "Practice recognizing when a previous partial result is useful and when it should be replaced.",
+
+                solution:
+`let current = nums[0];
+let best = nums[0];
+
+for (let i = 1; i < nums.length; i++) {
+
+    current = Math.max(
+        nums[i],
+        current + nums[i]
+    );
+
+    best = Math.max(best, current);
+}
+
+return best;`,
+
+                explanation:
+                    "At every position, current stores the best subarray sum ending at that position. best stores the maximum found overall."
+            }
+
+        ],
+
+
+        "Strings": [
+
+            {
+                type: "IMPORTANT",
+                difficulty: "Easy",
+
+                title:
+                    "Find the first non-repeating character",
+
+                description:
+                    "Given a string, find the first character that occurs exactly once.",
+
+                input:
+                    "\"swiss\"",
+
+                output:
+                    "\"w\"",
+
+                hint:
+                    "First think about how you can count how many times each character appears. Then scan the string again to find the first character whose count is one.",
+
+                understood:
+                    "You understand string traversal and the need to examine character frequency.",
+
+                error:
+                    "A common mistake is returning the first character that appears only once during the first traversal. You need the complete frequency information first.",
+
+                concept:
+                    "Character frequency counting and string traversal.",
+
+                improve:
+                    "Separate the frequency-counting step from the step that finds the first unique character.",
+
+                solution:
+`const frequency = {};
+
+for (const ch of s) {
+    frequency[ch] =
+        (frequency[ch] || 0) + 1;
+}
+
+for (const ch of s) {
+    if (frequency[ch] === 1) {
+        return ch;
+    }
+}
+
+return null;`,
+
+                explanation:
+                    "The first loop records frequencies. The second loop preserves the original order and finds the first character whose frequency is one."
+            },
+
+            {
+                type: "INTERVIEW STYLE",
+                difficulty: "Medium",
+
+                title:
+                    "Check whether two strings are anagrams",
+
+                description:
+                    "Write a program to determine whether two strings contain the same characters with the same frequencies.",
+
+                input:
+                    "\"listen\", \"silent\"",
+
+                output:
+                    "true",
+
+                hint:
+                    "If two strings are anagrams, every character must occur the same number of times in both strings.",
+
+                understood:
+                    "You understand that anagrams depend on character frequency rather than character position.",
+
+                error:
+                    "Checking only whether characters exist is not enough. Their frequencies must also match.",
+
+                concept:
+                    "Frequency maps and comparison of collections.",
+
+                improve:
+                    "Practice distinguishing between membership and frequency.",
+
+                solution:
+`if (s.length !== t.length) {
+    return false;
+}
+
+const count = {};
+
+for (const ch of s) {
+    count[ch] =
+        (count[ch] || 0) + 1;
+}
+
+for (const ch of t) {
+
+    if (!count[ch]) {
+        return false;
+    }
+
+    count[ch]--;
+}
+
+return true;`,
+
+                explanation:
+                    "The frequency of every character in the first string is counted and then reduced while processing the second string."
+            }
+
+        ]
+
+    };
+
+
+    /* =========================================================
+       4. THEORY QUESTIONS
+    ========================================================= */
+
+    const theoryQuestions = {
+
+        "Operating Systems": [
+
+            {
+                type: "PYQ",
+                difficulty: "Medium",
+
+                title:
+                    "Explain process synchronization",
+
+                description:
+                    "Explain why process synchronization is required. Discuss the critical-section problem and the conditions a correct solution should satisfy.",
+
+                hint:
+                    "Think about what can happen when multiple processes access shared data at the same time.",
+
+                understood:
+                    "Your answer should identify the problem caused by concurrent access to shared resources.",
+
+                error:
+                    "A complete answer should not stop at the definition of synchronization. It should explain the critical section and the requirements of mutual exclusion, progress, and bounded waiting.",
+
+                concept:
+                    "Process synchronization and critical-section requirements.",
+
+                improve:
+                    "Structure the answer using definition → problem → requirements → example."
+            },
+
+            {
+                type: "IMPORTANT",
+                difficulty: "Medium",
+
+                title:
+                    "Differentiate between process and thread",
+
+                description:
+                    "Explain the difference between a process and a thread. Discuss their memory and resource characteristics.",
+
+                hint:
+                    "Think about which resources are independent and which resources can be shared.",
+
+                understood:
+                    "Your answer should distinguish independent execution units from execution units within a process.",
+
+                error:
+                    "Avoid giving only one-line definitions. Compare memory, resources, creation cost and communication.",
+
+                concept:
+                    "Processes and threads.",
+
+                improve:
+                    "Use a structured comparison and include a practical example."
+            }
+
+        ],
+
+
+        "Computer Networks": [
+
+            {
+                type: "PYQ",
+                difficulty: "Medium",
+
+                title:
+                    "Explain the OSI model",
+
+                description:
+                    "Explain the seven layers of the OSI model and describe the primary responsibility of each layer.",
+
+                hint:
+                    "Start from physical transmission and move upward toward applications.",
+
+                understood:
+                    "Your answer should demonstrate understanding of layered network communication.",
+
+                error:
+                    "Listing the seven names without explaining their responsibilities is incomplete.",
+
+                concept:
+                    "Layered network architecture.",
+
+                improve:
+                    "Connect every layer with its major responsibility and one suitable example."
+            },
+
+            {
+                type: "INTERVIEW STYLE",
+                difficulty: "Medium",
+
+                title:
+                    "Why is TCP reliable?",
+
+                description:
+                    "Explain why TCP is considered reliable and describe the mechanisms responsible for that reliability.",
+
+                hint:
+                    "Think about acknowledgements, sequence numbers, retransmission and flow control.",
+
+                understood:
+                    "You understand that reliability requires mechanisms for detecting and recovering from lost data.",
+
+                error:
+                    "Do not simply say that TCP is reliable. Explain the mechanisms that create that reliability.",
+
+                concept:
+                    "Reliable transport protocols.",
+
+                improve:
+                    "Explain how acknowledgements, sequencing and retransmission work together."
+            }
+
+        ],
+
+
+        "DBMS": [
+
+            {
+                type: "PYQ",
+                difficulty: "Medium",
+
+                title:
+                    "Explain database normalization",
+
+                description:
+                    "What is normalization? Explain why it is required and describe the basic normal forms.",
+
+                hint:
+                    "Think about redundant data and the problems caused when data is inserted, updated or deleted.",
+
+                understood:
+                    "Your answer should connect normalization with reducing redundancy and maintaining data consistency.",
+
+                error:
+                    "Definitions alone are insufficient. Explain the problems normalization solves and the role of functional dependencies.",
+
+                concept:
+                    "Database normalization.",
+
+                improve:
+                    "Use an example table to explain how normalization reduces redundancy."
+            },
+
+            {
+                type: "IMPORTANT",
+                difficulty: "Medium",
+
+                title:
+                    "Explain ACID properties",
+
+                description:
+                    "Explain Atomicity, Consistency, Isolation and Durability with a practical transaction example.",
+
+                hint:
+                    "Imagine a bank transfer where money moves from one account to another.",
+
+                understood:
+                    "You understand that transactions must behave predictably even when failures occur.",
+
+                error:
+                    "Make sure each of the four properties is explained separately and connected to the transaction example.",
+
+                concept:
+                    "Database transactions and ACID properties.",
+
+                improve:
+                    "Use one consistent real-world example for all four properties."
+            }
+
+        ]
+
+    };
+
+
+    /* =========================================================
+       5. CHOOSE QUESTION SET
+    ========================================================= */
+
+    let questions;
+
+
+    if (codingMode) {
+
+        questions =
+            codingQuestions[concept] ||
+            codingQuestions["Arrays"];
+
+    } else {
+
+        questions =
+            theoryQuestions[subject] ||
+            [
+                {
+                    type: "IMPORTANT",
+                    difficulty: "Medium",
+
+                    title:
+                        `Explain ${concept}`,
+
+                    description:
+                        `Explain ${concept} in your own words. Include its purpose, how it works, important principles and a practical example.`,
+
+                    hint:
+                        "Start by explaining why this concept exists and what problem it solves.",
+
+                    understood:
+                        `Your ability to explain ${concept} in your own words.`,
+
+                    error:
+                        "A strong answer should explain both the concept and its practical application.",
+
+                    concept:
+                        concept,
+
+                    improve:
+                        "Connect the theoretical definition with a practical engineering example."
+                }
+            ];
+
+    }
+
+
+    let currentQuestion = 0;
+
+
+    /* =========================================================
+       6. LOAD QUESTION
+    ========================================================= */
+
+    function loadQuestion() {
+
+        const q = questions[currentQuestion];
+
+
+        document.getElementById("questionType").textContent =
+            q.type;
+
+
+        document.getElementById("difficulty").textContent =
+            "Difficulty: " + q.difficulty;
+
+
+        document.getElementById("questionNumber").textContent =
+            "QUESTION " +
+            String(currentQuestion + 1).padStart(2, "0");
+
+
+        document.getElementById("questionTitle").textContent =
+            q.title;
+
+
+        document.getElementById("questionDescription").textContent =
+            q.description;
+
+
+        document.getElementById("progressText").textContent =
+            `Question ${currentQuestion + 1} of ${questions.length}`;
+
+
+        const percentage =
+            ((currentQuestion + 1) /
+                questions.length) * 100;
+
+
+        document.getElementById("progressFill")
+            .style.width =
+            percentage + "%";
+
+
+        document.getElementById("hintText").textContent =
+            q.hint;
+
+
+        document.getElementById("hintBox").style.display =
+            "none";
+
+
+        document.getElementById("aiReview").style.display =
+            "none";
+
+
+        document.getElementById("solutionBox").style.display =
+            "none";
+
+
+        document.getElementById("solutionButton").style.display =
+            "none";
+
+
+        document.getElementById("nextBox").style.display =
+            "none";
+
+
+        document.getElementById("codeOutput").style.display =
+            "none";
+
+
+        document.getElementById("codeEditor").value =
+            "";
+
+
+        document.getElementById("answerBox").value =
+            "";
+
+
+        if (q.input) {
+
+            document.getElementById("testInput").textContent =
+                q.input;
+
+            document.getElementById("testOutput").textContent =
+                q.output;
+
+        }
+
+    }
+
+
+    /* =========================================================
+       7. HINT
+    ========================================================= */
+
+    function showHint() {
+
+        const box =
+            document.getElementById("hintBox");
+
+        box.style.display =
+            box.style.display === "block"
+                ? "none"
+                : "block";
+
+    }
+
+
+    /* =========================================================
+       8. RUN CODE
+    ========================================================= */
+
+    function runCode() {
+
+        const code =
+            document.getElementById("codeEditor")
+                .value.trim();
+
+        const output =
+            document.getElementById("codeOutput");
+
+
+        output.style.display =
+            "block";
+
+
+        if (!code) {
+
+            output.className =
+                "output error";
+
+            output.innerHTML =
+                "⚠️ Write some code before running it.";
+
+            return;
+        }
+
+
+        const language =
+            document.getElementById("language")
+                .value;
+
+
+        if (language !== "JavaScript") {
+
+            output.className =
+                "output";
+
+            output.innerHTML =
+                `🧪 <strong>Execution environment:</strong><br>
+                The Practice interface supports JavaScript execution in this prototype.
+                ${language} execution will be connected through a secure code-execution backend.`;
+
+            return;
+        }
+
+
+        try {
+
+            let capturedOutput = "";
+
+            const originalLog = console.log;
+
+
+            console.log = function(...args) {
+
+                capturedOutput +=
+                    args.join(" ") + "\n";
+
+            };
+
+
+            const result =
+                Function(
+                    '"use strict";\n' +
+                    code
+                )();
+
+
+            console.log =
+                originalLog;
+
+
+            output.className =
+                "output";
+
+
+            output.innerHTML =
+                `✅ <strong>Code executed successfully.</strong>
+                <br><br>
+                Output:
+                <br>
+                ${capturedOutput || result !== undefined
+                    ? (capturedOutput ||
+                       String(result))
+                    : "Program completed."}`;
+
+        }
+
+        catch(error) {
+
+            output.className =
+                "output error";
+
+
+            output.innerHTML =
+                `❌ <strong>Your code has an error.</strong>
+                <br><br>
+                ${escapeHTML(error.message)}
+                <br><br>
+                Click <strong>Analyze My Code</strong> and ConceptLens will explain the likely issue.`;
+
+        }
+
+    }
+
+
+    /* =========================================================
+       9. CODE ANALYSIS
+       ========================================================= */
+
+    function reviewCode() {
+
+        const code =
+            document.getElementById("codeEditor")
+                .value.trim();
+
+
+        if (!code) {
+
+            alert(
+                "Write your solution first."
+            );
+
+            return;
+
+        }
+
+
+        const q =
+            questions[currentQuestion];
+
+
+        let understood =
+            q.understood;
+
+        let error =
+            q.error;
+
+        let improve =
+            q.improve;
+
+
+        /*
+            Basic prototype analysis.
+
+            Later this exact area can be connected
+            to Gemini through a secure backend.
+        */
+
+        const lowerCode =
+            code.toLowerCase();
+
+
+        if (
+            q.title
+                .toLowerCase()
+                .includes("largest") &&
+            lowerCode.includes("nums[i] = largest")
+        ) {
+
+            understood =
+                "You correctly understood that every array element should be compared with a variable representing the current largest value.";
+
+            error =
+                "The main logic error is the assignment `nums[i] = largest`. This changes the array element. You need to update `largest` instead: `largest = nums[i]`.";
+
+            improve =
+                "Focus on the direction of assignment. The array provides the value; the tracking variable stores the best value found so far.";
+
+        }
+
+
+        if (
+            q.title
+                .toLowerCase()
+                .includes("largest") &&
+            lowerCode.includes("largest = 0")
+        ) {
+
+            understood =
+                "You understand the idea of maintaining a `largest` variable while traversing the array.";
+
+            error =
+                "Initializing `largest` to 0 can fail when every number in the array is negative. For example, [-8, -3, -5] would incorrectly produce 0.";
+
+            improve =
+                "Initialize the tracking variable using an actual array value, such as `nums[0]`, so negative arrays are handled correctly.";
+
+        }
+
+
+        if (
+            lowerCode.includes("sort") &&
+            q.title.toLowerCase()
+                .includes("largest")
+        ) {
+
+            understood =
+                "You understand that ordering the values can help identify the largest element.";
+
+            error =
+                "Sorting can produce the correct answer, but it performs more work than necessary for simply finding the largest value.";
+
+            improve =
+                "Try solving the problem with one traversal. This reduces the time complexity from sorting-based O(N log N) to O(N).";
+
+        }
+
+
+        if (
+            q.title
+                .toLowerCase()
+                .includes("non-repeating") &&
+            !lowerCode.includes("frequency") &&
+            !lowerCode.includes("count")
+        ) {
+
+            understood =
+                "You recognized that the string needs to be traversed.";
+
+            error =
+                "Your solution does not appear to keep track of how many times each character occurs. Without frequency information, it is difficult to reliably identify the first non-repeating character.";
+
+            improve =
+                "Use a frequency map or object first, then perform a second traversal to find the first character with frequency one.";
+
+        }
+
+
+        document.getElementById("understoodText")
+            .textContent =
+            understood;
+
+
+        document.getElementById("errorText")
+            .textContent =
+            error;
+
+
+        document.getElementById("conceptText")
+            .textContent =
+            q.concept;
+
+
+        document.getElementById("improveText")
+            .textContent =
+            improve;
+
+
+        document.getElementById("aiReview")
+            .style.display =
+            "block";
+
+
+        if (q.solution) {
+
+            document.getElementById("solutionButton")
+                .style.display =
+                "inline-block";
+
+        }
+
+
+        document.getElementById("nextText")
+            .textContent =
+            `After this, ConceptLens recommends another ${q.difficulty.toLowerCase()} problem targeting the same concept.`;
+
+        document.getElementById("nextBox")
+            .style.display =
+            "block";
+
+
+        document.getElementById("aiReview")
+            .scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
+
+    }
+
+
+    /* =========================================================
+       10. THEORY ANSWER ANALYSIS
+    ========================================================= */
+
+    function reviewAnswer() {
+
+        const answer =
+            document.getElementById("answerBox")
+                .value.trim();
+
+
+        if (!answer) {
+
+            alert(
+                "Write your answer first."
+            );
+
+            return;
+
+        }
+
+
+        const q =
+            questions[currentQuestion];
+
+
+        document.getElementById("understoodText")
+            .textContent =
+            q.understood;
+
+
+        document.getElementById("errorText")
+            .textContent =
+            answer.length < 100
+                ? "Your answer is quite short. You have started with the main idea, but important supporting points are missing."
+                : q.error;
+
+
+        document.getElementById("conceptText")
+            .textContent =
+            q.concept;
+
+
+        document.getElementById("improveText")
+            .textContent =
+            q.improve;
+
+
+        document.getElementById("aiReview")
+            .style.display =
+            "block";
+
+
+        document.getElementById("nextText")
+            .textContent =
+            "Your next question will continue building this concept.";
+
+        document.getElementById("nextBox")
+            .style.display =
+            "block";
+
+
+        document.getElementById("aiReview")
+            .scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
+
+    }
+
+
+    /* =========================================================
+       11. SHOW CORRECT SOLUTION
+    ========================================================= */
+
+    function showSolution() {
+
+        const q =
+            questions[currentQuestion];
+
+
+        if (!q.solution) {
+            return;
+        }
+
+
+        document.getElementById("solutionCode")
+            .textContent =
+            q.solution;
+
+
+        document.getElementById("solutionExplanation")
+            .textContent =
+            q.explanation;
+
+
+        document.getElementById("solutionBox")
+            .style.display =
+            "block";
+
+
+        document.getElementById("solutionBox")
+            .scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
+
+    }
+
+
+    /* =========================================================
+       12. NEXT QUESTION
+    ========================================================= */
+
+    function nextQuestion() {
+
+        if (
+            currentQuestion <
+            questions.length - 1
+        ) {
+
+            currentQuestion++;
+
+            loadQuestion();
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        } else {
+
+            finishPractice();
+
+        }
+
+    }
+
+
+    /* =========================================================
+       13. FINAL INSIGHT
+    ========================================================= */
+
+    function finishPractice() {
+
+        document.getElementById("finalInsight")
+            .style.display =
+            "block";
+
+
+        document.getElementById("finalText")
+            .textContent =
+            `You completed your ${concept} practice session. ConceptLens has focused on how you approach problems, not simply whether your final answer is correct. Continue practicing with unfamiliar problems to strengthen your understanding.`;
+
+
+        document.getElementById("focusText")
+            .textContent =
+            `Keep practicing ${concept} through application-based problems, debugging, and progressively harder questions.`;
+
+
+        document.getElementById("finalInsight")
+            .scrollIntoView({
+                behavior: "smooth"
+            });
+
+    }
+
+
+    /* =========================================================
+       14. HTML ESCAPE
+    ========================================================= */
+
+    function escapeHTML(text) {
+
+        return text
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+
+    }
+
+
+    /* =========================================================
+       15. START
+    ========================================================= */
+
+    loadQuestion();
+
+</script>
+
+</body>
+</html>

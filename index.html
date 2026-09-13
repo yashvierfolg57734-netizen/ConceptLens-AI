@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>ConceptLens AI</title>
+
+
+    <style>
+
+        /* =====================================
+           RESET
+        ===================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        /* =====================================
+           COLORS
+        ===================================== */
+
+        :root {
+
+            --background: #FBFAF7;
+
+            --lilac: #E6D6F7;
+
+            --mauve: #E6D6E7;
+
+            --lemon: #FEF3B0;
+
+            --sage: #D6EAD4;
+
+            --peach: #FFD6A5;
+
+            --text: #302B3A;
+
+            --muted: #77717F;
+
+            --white: #FFFFFF;
+
+        }
+
+
+        /* =====================================
+           BODY
+        ===================================== */
+
+        body {
+
+            font-family:
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Roboto,
+                Helvetica,
+                Arial,
+                sans-serif;
+
+            background: var(--background);
+
+            color: var(--text);
+
+            min-height: 100vh;
+
+            overflow-x: hidden;
+
+        }
+
+
+        /* =====================================
+           NAVBAR
+        ===================================== */
+
+        .navbar {
+
+            height: 82px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 0 6%;
+
+            position: relative;
+
+            z-index: 10;
+
+        }
+
+
+        .nav-logo {
+
+            font-size: 22px;
+
+            font-weight: 700;
+
+            color: var(--text);
+
+            letter-spacing: -0.5px;
+
+        }
+
+
+        .nav-logo span {
+
+            font-weight: 400;
+
+            opacity: 0.65;
+
+        }
+
+
+        .login-button {
+
+            border: none;
+
+            background: var(--white);
+
+            color: var(--text);
+
+            padding: 11px 22px;
+
+            border-radius: 12px;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 4px 15px rgba(60, 50, 70, 0.08);
+
+            transition: 0.25s ease;
+
+            text-decoration: none;
+
+            display: inline-block;
+
+        }
+
+
+        .login-button:hover {
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 7px 20px rgba(60, 50, 70, 0.12);
+
+        }
+
+
+        /* =====================================
+           HERO
+        ===================================== */
+
+        .hero {
+
+            min-height: calc(100vh - 82px);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+
+            padding: 40px 20px 80px;
+
+            position: relative;
+
+            isolation: isolate;
+
+        }
+
+
+        .hero-content {
+
+            width: 100%;
+
+            max-width: 1050px;
+
+            position: relative;
+
+        }
+
+
+        /* =====================================
+           SMALL TOP LABEL
+        ===================================== */
+
+        .badge {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            padding: 9px 17px;
+
+            border-radius: 30px;
+
+            background: var(--lilac);
+
+            color: #6D587C;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            margin-bottom: 24px;
+
+        }
+
+
+        .badge-dot {
+
+            width: 7px;
+
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: #A77CC5;
+
+        }
+
+
+        /* =====================================
+           MAIN WEBSITE NAME
+        ===================================== */
+
+        .brand-name {
+
+            font-size: clamp(65px, 9vw, 125px);
+
+            line-height: 0.95;
+
+            letter-spacing: -5px;
+
+            font-weight: 800;
+
+            color: var(--text);
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .brand-name span {
+
+            color: #8B6B91;
+
+            font-weight: 500;
+
+        }
+
+
+        /* =====================================
+           TAGLINE
+        ===================================== */
+
+        .tagline {
+
+            font-size: clamp(22px, 3vw, 31px);
+
+            font-weight: 600;
+
+            color: var(--text);
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .tagline span {
+
+            background: var(--lemon);
+
+            padding: 2px 9px;
+
+            border-radius: 8px;
+
+        }
+
+
+        /* =====================================
+           DESCRIPTION
+        ===================================== */
+
+        .description {
+
+            max-width: 650px;
+
+            margin: 0 auto;
+
+            font-size: 17px;
+
+            line-height: 1.7;
+
+            color: var(--muted);
+
+            margin-bottom: 32px;
+
+        }
+
+
+        /* =====================================
+           START BUTTON
+        ===================================== */
+
+        .start-button {
+
+            border: none;
+
+            padding: 15px 30px;
+
+            border-radius: 14px;
+
+            background: var(--text);
+
+            color: white;
+
+            font-size: 15px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition: 0.25s ease;
+
+            box-shadow:
+                0 8px 20px rgba(48, 43, 58, 0.15);
+
+            text-decoration: none;
+
+            display: inline-block;
+
+        }
+
+
+        .start-button:hover {
+
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 12px 25px rgba(48, 43, 58, 0.20);
+
+        }
+
+
+        /* =====================================
+           FLOATING CARDS
+        ===================================== */
+
+        .floating-card {
+
+            position: absolute;
+
+            padding: 16px 20px;
+
+            border-radius: 18px;
+
+            color: var(--text);
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            box-shadow:
+                0 12px 35px rgba(60, 50, 70, 0.08);
+
+            border: 1px solid rgba(255,255,255,0.8);
+
+        }
+
+
+        /* LEFT TOP */
+
+        .card-one {
+
+            top: 45px;
+
+            left: 30px;
+
+            background: var(--peach);
+
+            transform: rotate(-5deg);
+
+        }
+
+
+        /* RIGHT TOP */
+
+        .card-two {
+
+            top: 25px;
+
+            right: 30px;
+
+            background: var(--sage);
+
+            transform: rotate(5deg);
+
+        }
+
+
+        /* LEFT BOTTOM */
+
+        .card-three {
+
+            bottom: 40px;
+
+            left: 80px;
+
+            background: var(--mauve);
+
+            transform: rotate(4deg);
+
+        }
+
+
+        /* RIGHT BOTTOM */
+
+        .card-four {
+
+            bottom: 30px;
+
+            right: 80px;
+
+            background: var(--lilac);
+
+            transform: rotate(-4deg);
+
+        }
+
+
+        /* =====================================
+           DECORATIVE SHAPES
+        ===================================== */
+
+        .shape {
+
+            position: absolute;
+
+            border-radius: 50%;
+
+            z-index: -1;
+
+        }
+
+
+        .shape-one {
+
+            width: 180px;
+
+            height: 180px;
+
+            background: var(--lilac);
+
+            opacity: 0.45;
+
+            top: -50px;
+
+            left: 15%;
+
+        }
+
+
+        .shape-two {
+
+            width: 150px;
+
+            height: 150px;
+
+            background: var(--lemon);
+
+            opacity: 0.45;
+
+            bottom: 20px;
+
+            right: 18%;
+
+        }
+
+
+        .shape-three {
+
+            width: 110px;
+
+            height: 110px;
+
+            background: var(--peach);
+
+            opacity: 0.35;
+
+            top: 35%;
+
+            right: 4%;
+
+        }
+
+
+        /* =====================================
+           RESPONSIVE
+        ===================================== */
+
+        @media (max-width: 800px) {
+
+            .navbar {
+
+                padding: 0 20px;
+
+            }
+
+
+            .brand-name {
+
+                font-size: 62px;
+
+                letter-spacing: -3px;
+
+            }
+
+
+            .floating-card {
+
+                display: none;
+
+            }
+
+
+            .shape-one {
+
+                left: -50px;
+
+            }
+
+
+            .shape-two {
+
+                right: -40px;
+
+            }
+
+        }
+
+
+        @media (max-width: 500px) {
+
+            .brand-name {
+
+                font-size: 48px;
+
+            }
+
+
+            .tagline {
+
+                font-size: 21px;
+
+            }
+
+
+            .description {
+
+                font-size: 15px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+
+<body>
+
+
+    <!-- =====================================
+         NAVIGATION
+    ===================================== -->
+
+    <nav class="navbar">
+
+        <div class="nav-logo">
+
+            ConceptLens <span>AI</span>
+
+        </div>
+
+
+        <!-- MODIFIED: Opens login page -->
+
+        <a href="login.html" class="login-button">
+
+            Login
+
+        </a>
+
+    </nav>
+
+
+
+    <!-- =====================================
+         MAIN HERO
+    ===================================== -->
+
+    <main class="hero">
+
+
+        <!-- Decorative shapes -->
+
+        <div class="shape shape-one"></div>
+
+        <div class="shape shape-two"></div>
+
+        <div class="shape shape-three"></div>
+
+
+
+        <div class="hero-content">
+
+
+            <!-- Floating learning cards -->
+
+            <div class="floating-card card-one">
+
+                📚 Data Structures
+
+            </div>
+
+
+            <div class="floating-card card-two">
+
+                🧠 Artificial Intelligence
+
+            </div>
+
+
+            <div class="floating-card card-three">
+
+                ⚡ Algorithms
+
+            </div>
+
+
+            <div class="floating-card card-four">
+
+                💻 Computer Science
+
+            </div>
+
+
+
+            <!-- Main badge -->
+
+            <div class="badge">
+
+                <span class="badge-dot"></span>
+
+                AI-Powered Adaptive Learning
+
+            </div>
+
+
+
+            <!-- MAIN WEBSITE NAME -->
+
+            <h1 class="brand-name">
+
+                ConceptLens <span>AI</span>
+
+            </h1>
+
+
+
+            <!-- TAGLINE -->
+
+            <h2 class="tagline">
+
+                Understand the concept,
+                <span>not just the answer.</span>
+
+            </h2>
+
+
+
+            <!-- DESCRIPTION -->
+
+            <p class="description">
+
+                Learn engineering concepts through interactive
+                explanations, intelligent assessments, and personalized
+                practice designed around the way you learn.
+
+            </p>
+
+
+
+            <!-- MODIFIED: Opens login page -->
+
+            <a href="login.html" class="start-button">
+
+                Start Learning →
+
+            </a>
+
+
+        </div>
+
+    </main>
+
+
+</body>
+
+</html>

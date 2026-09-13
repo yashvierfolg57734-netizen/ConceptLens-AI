@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Assessment | ConceptLens AI</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="assessment-page">
+
+    <header class="top-navbar">
+
+        <div class="nav-brand">
+            <div class="brand-icon">C</div>
+            <span>ConceptLens <strong>AI</strong></span>
+        </div>
+
+        <a href="index.html" class="nav-back">
+            ← Exit assessment
+        </a>
+
+    </header>
+
+
+    <main class="assessment-container">
+
+        <section class="assessment-header">
+
+            <div>
+                <p class="eyebrow">KNOWLEDGE CHECK</p>
+
+                <h1>Let's check your understanding.</h1>
+
+                <p>
+                    Your answers help ConceptLens identify the areas
+                    where you need more practice.
+                </p>
+            </div>
+
+            <div class="assessment-progress-box">
+                <span id="questionCounter">Question 1 of 5</span>
+
+                <div class="progress-track">
+                    <div
+                        class="progress-fill"
+                        id="assessmentProgress"
+                    ></div>
+                </div>
+            </div>
+
+        </section>
+
+
+        <section class="quiz-card">
+
+            <div class="quiz-topic">
+                <span>Computer Science</span>
+                <span>•</span>
+                <span>Merge Sort</span>
+            </div>
+
+            <h2 id="questionText">
+                What is the main idea behind Merge Sort?
+            </h2>
+
+
+            <div class="answer-options" id="answerOptions">
+
+                <button class="answer-option" data-answer="A">
+                    <span class="option-letter">A</span>
+
+                    <span>
+                        Divide the array into smaller parts,
+                        then merge sorted parts.
+                    </span>
+                </button>
+
+                <button class="answer-option" data-answer="B">
+                    <span class="option-letter">B</span>
+
+                    <span>
+                        Search every element one by one.
+                    </span>
+                </button>
+
+                <button class="answer-option" data-answer="C">
+                    <span class="option-letter">C</span>
+
+                    <span>
+                        Always select the largest element first.
+                    </span>
+                </button>
+
+                <button class="answer-option" data-answer="D">
+                    <span class="option-letter">D</span>
+
+                    <span>
+                        Randomly rearrange the elements.
+                    </span>
+                </button>
+
+            </div>
+
+
+            <div class="quiz-bottom">
+
+                <p id="answerFeedback" class="answer-feedback"></p>
+
+                <button
+                    id="nextQuestion"
+                    class="primary-button next-button"
+                    disabled
+                >
+                    Next question →
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <section class="assessment-tip">
+
+            <div class="tip-icon">✦</div>
+
+            <div>
+                <strong>ConceptLens insight</strong>
+
+                <p>
+                    We don't only measure whether your answer is correct.
+                    We use your mistakes to identify the concept that
+                    needs more explanation and practice.
+                </p>
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>

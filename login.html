@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Login | ConceptLens AI</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body class="login-page">
+
+
+    <div class="login-background">
+
+        <div class="floating-shape shape-one"></div>
+
+        <div class="floating-shape shape-two"></div>
+
+        <div class="floating-shape shape-three"></div>
+
+    </div>
+
+
+    <main class="login-container">
+
+
+        <a href="index.html" class="back-link">
+            ← Back to home
+        </a>
+
+
+        <section class="login-card">
+
+
+            <div class="brand-small">
+
+                <div class="brand-icon">
+                    C
+                </div>
+
+                <span>
+                    ConceptLens AI
+                </span>
+
+            </div>
+
+
+            <div class="login-heading">
+
+                <p class="eyebrow">
+                    WELCOME BACK
+                </p>
+
+                <h1>
+                    Let's continue<br>
+                    <span>learning.</span>
+                </h1>
+
+                <p>
+                    Sign in to continue your personalized
+                    learning journey.
+                </p>
+
+            </div>
+
+
+            <form id="loginForm">
+
+
+                <div class="input-group">
+
+                    <label for="studentId">
+                        Student ID / Email
+                    </label>
+
+                    <input
+                        type="text"
+                        id="studentId"
+                        placeholder="Enter your student ID or email"
+                        autocomplete="username"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <div class="password-wrapper">
+
+                        <input
+                            type="password"
+                            id="password"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            id="togglePassword"
+                        >
+                            👁
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="login-options">
+
+                    <label class="remember-option">
+
+                        <input
+                            type="checkbox"
+                            id="rememberMe"
+                        >
+
+                        <span>
+                            Remember me
+                        </span>
+
+                    </label>
+
+
+                    <a
+                        href="#"
+                        onclick="showForgotPassword(event)"
+                    >
+                        Forgot password?
+                    </a>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="primary-button login-submit"
+                >
+
+                    <span>
+                        Login to ConceptLens
+                    </span>
+
+                    <span>
+                        →
+                    </span>
+
+                </button>
+
+
+                <p
+                    id="loginMessage"
+                    class="form-message"
+                ></p>
+
+
+            </form>
+
+
+            <div class="demo-note">
+
+                <div class="demo-icon">
+                    ✦
+                </div>
+
+                <div>
+
+                    <strong>
+                        Demo access
+                    </strong>
+
+                    <p>
+                        For this prototype, enter any Student ID
+                        and a password of 6+ characters.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <p class="login-footer">
+                ConceptLens AI · Learn smarter, understand deeper.
+            </p>
+
+
+        </section>
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

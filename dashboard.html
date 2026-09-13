@@ -1,0 +1,1626 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard | ConceptLens AI</title>
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        :root {
+
+            --background: #FBFAF7;
+
+            --lilac: #E6D6F7;
+
+            --mauve: #E6D6E7;
+
+            --lemon: #FEF3B0;
+
+            --sage: #D6EAD4;
+
+            --peach: #FFD6A5;
+
+            --text: #302B3A;
+
+            --muted: #77717F;
+
+            --white: #FFFFFF;
+
+            --border: #E9E1EC;
+
+        }
+
+
+        body {
+
+            font-family:
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Roboto,
+                Helvetica,
+                Arial,
+                sans-serif;
+
+            background: var(--background);
+
+            color: var(--text);
+
+            min-height: 100vh;
+
+        }
+
+
+        /* ================================
+           NAVBAR
+        ================================= */
+
+        .navbar {
+
+            height: 82px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 0 6%;
+
+            background: rgba(251,250,247,0.95);
+
+            border-bottom: 1px solid rgba(48,43,58,0.06);
+
+        }
+
+
+        .nav-logo {
+
+            font-size: 22px;
+
+            font-weight: 700;
+
+        }
+
+
+        .nav-logo span {
+
+            font-weight: 400;
+
+            opacity: 0.65;
+
+        }
+
+
+        .logout-button {
+
+            text-decoration: none;
+
+            color: var(--text);
+
+            background: var(--white);
+
+            padding: 11px 19px;
+
+            border-radius: 12px;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            box-shadow:
+                0 4px 15px rgba(60,50,70,0.08);
+
+        }
+
+
+        /* ================================
+           CONTAINER
+        ================================= */
+
+        .container {
+
+            max-width: 1100px;
+
+            margin: auto;
+
+            padding: 55px 25px 80px;
+
+        }
+
+
+        /* ================================
+           HEADER
+        ================================= */
+
+        .welcome-label {
+
+            display: inline-flex;
+
+            padding: 9px 17px;
+
+            border-radius: 30px;
+
+            background: var(--lilac);
+
+            color: #6D587C;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .heading h1 {
+
+            font-size: clamp(40px, 6vw, 62px);
+
+            line-height: 1.05;
+
+            letter-spacing: -2px;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .heading h1 span {
+
+            color: #8B6B91;
+
+            font-weight: 500;
+
+        }
+
+
+        .heading p {
+
+            color: var(--muted);
+
+            font-size: 17px;
+
+            line-height: 1.7;
+
+            max-width: 700px;
+
+        }
+
+
+        /* ================================
+           SELECTION SECTION
+        ================================= */
+
+        .selection-section {
+
+            margin-top: 45px;
+
+        }
+
+
+        .selection-title {
+
+            font-size: 23px;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        /* ================================
+           BRANCHES
+        ================================= */
+
+        .branch-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 15px;
+
+        }
+
+
+        .branch-card {
+
+            border: 2px solid transparent;
+
+            background: var(--white);
+
+            border-radius: 18px;
+
+            padding: 22px;
+
+            cursor: pointer;
+
+            transition: 0.25s ease;
+
+            box-shadow:
+                0 8px 25px rgba(60,50,70,0.06);
+
+        }
+
+
+        .branch-card:hover {
+
+            transform: translateY(-3px);
+
+        }
+
+
+        .branch-card.selected {
+
+            border-color: #8B6B91;
+
+            background: var(--mauve);
+
+        }
+
+
+        .branch-card h3 {
+
+            font-size: 18px;
+
+            margin-bottom: 6px;
+
+        }
+
+
+        .branch-card p {
+
+            color: var(--muted);
+
+            font-size: 13px;
+
+        }
+
+
+        /* ================================
+           SUBJECTS
+        ================================= */
+
+        .subject-section {
+
+            margin-top: 40px;
+
+            display: none;
+
+        }
+
+
+        .subject-section.show {
+
+            display: block;
+
+        }
+
+
+        .subject-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 15px;
+
+        }
+
+
+        .subject-card {
+
+            background: var(--white);
+
+            border-radius: 18px;
+
+            padding: 23px;
+
+            cursor: pointer;
+
+            border: 2px solid transparent;
+
+            box-shadow:
+                0 8px 25px rgba(60,50,70,0.06);
+
+            transition: 0.25s ease;
+
+        }
+
+
+        .subject-card:hover {
+
+            transform: translateY(-3px);
+
+        }
+
+
+        .subject-card.selected {
+
+            border-color: #8B6B91;
+
+            background: var(--lilac);
+
+        }
+
+
+        .subject-card h3 {
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .subject-card p {
+
+            color: var(--muted);
+
+            font-size: 14px;
+
+            line-height: 1.5;
+
+        }
+
+
+        /* ================================
+           CONCEPTS
+        ================================= */
+
+        .concept-section {
+
+            margin-top: 40px;
+
+            display: none;
+
+        }
+
+
+        .concept-section.show {
+
+            display: block;
+
+        }
+
+
+        .concept-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 15px;
+
+        }
+
+
+        .concept-card {
+
+            background: var(--white);
+
+            border-radius: 18px;
+
+            padding: 22px;
+
+            cursor: pointer;
+
+            border: 2px solid transparent;
+
+            box-shadow:
+                0 8px 25px rgba(60,50,70,0.06);
+
+            transition: 0.25s ease;
+
+        }
+
+
+        .concept-card:hover {
+
+            transform: translateY(-3px);
+
+            background: var(--lemon);
+
+        }
+
+
+        .concept-card h3 {
+
+            font-size: 17px;
+
+            margin-bottom: 7px;
+
+        }
+
+
+        .concept-card p {
+
+            color: var(--muted);
+
+            font-size: 13px;
+
+            line-height: 1.5;
+
+        }
+
+
+        /* ================================
+           SELECTED INFORMATION
+        ================================= */
+
+        .selected-info {
+
+            margin-top: 40px;
+
+            padding: 25px;
+
+            border-radius: 20px;
+
+            background: var(--sage);
+
+            display: none;
+
+        }
+
+
+        .selected-info.show {
+
+            display: block;
+
+        }
+
+
+        .selected-info p {
+
+            color: #536052;
+
+            margin-bottom: 5px;
+
+            font-size: 14px;
+
+        }
+
+
+        .selected-info strong {
+
+            color: var(--text);
+
+        }
+
+
+        .continue-button {
+
+            display: inline-block;
+
+            margin-top: 18px;
+
+            text-decoration: none;
+
+            background: var(--text);
+
+            color: var(--white);
+
+            padding: 14px 24px;
+
+            border-radius: 13px;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+        }
+
+
+        /* ================================
+           RESPONSIVE
+        ================================= */
+
+        @media(max-width: 850px) {
+
+            .branch-grid {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+
+            }
+
+            .concept-grid {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+
+            }
+
+        }
+
+
+        @media(max-width: 600px) {
+
+            .container {
+
+                padding: 35px 18px 60px;
+
+            }
+
+            .branch-grid,
+            .subject-grid,
+            .concept-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- NAVIGATION -->
+
+    <nav class="navbar">
+
+        <div class="nav-logo">
+
+            ConceptLens <span>AI</span>
+
+        </div>
+
+
+        <a href="index.html"
+           class="logout-button">
+
+            ← Home
+
+        </a>
+
+    </nav>
+
+
+
+    <main class="container">
+
+
+        <!-- HEADER -->
+
+        <section class="heading">
+
+            <div class="welcome-label">
+
+                PERSONALIZED LEARNING
+
+            </div>
+
+
+            <h1>
+
+                Learn concepts
+                <span>your way.</span>
+
+            </h1>
+
+
+            <p>
+
+                Choose your engineering branch, select a subject,
+                and explore the concepts you want to understand.
+
+            </p>
+
+        </section>
+
+
+
+        <!-- BRANCH -->
+
+        <section class="selection-section">
+
+            <h2 class="selection-title">
+
+                1. Choose your engineering branch
+
+            </h2>
+
+
+            <div class="branch-grid">
+
+                <div class="branch-card"
+                     onclick="selectBranch('CSE', this)">
+
+                    <h3>💻 CSE</h3>
+
+                    <p>Computer Science & Engineering</p>
+
+                </div>
+
+
+                <div class="branch-card"
+                     onclick="selectBranch('CSE-AI', this)">
+
+                    <h3>🧠 CSE — AI</h3>
+
+                    <p>Computer Science & Artificial Intelligence</p>
+
+                </div>
+
+
+                <div class="branch-card"
+                     onclick="selectBranch('IT', this)">
+
+                    <h3>🌐 IT</h3>
+
+                    <p>Information Technology</p>
+
+                </div>
+
+
+                <div class="branch-card"
+                     onclick="selectBranch('ECE', this)">
+
+                    <h3>📡 ECE</h3>
+
+                    <p>Electronics & Communication</p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- SUBJECT -->
+
+        <section id="subjectSection"
+                 class="subject-section">
+
+            <h2 class="selection-title">
+
+                2. Choose a subject
+
+            </h2>
+
+
+            <div id="subjectGrid"
+                 class="subject-grid">
+
+            </div>
+
+        </section>
+
+
+
+        <!-- CONCEPT -->
+
+        <section id="conceptSection"
+                 class="concept-section">
+
+            <h2 class="selection-title">
+
+                3. Choose a concept
+
+            </h2>
+
+
+            <div id="conceptGrid"
+                 class="concept-grid">
+
+            </div>
+
+        </section>
+
+
+
+        <!-- SELECTED -->
+
+        <div id="selectedInfo"
+             class="selected-info">
+
+            <p>
+                Branch:
+                <strong id="selectedBranch">
+                </strong>
+            </p>
+
+            <p>
+                Subject:
+                <strong id="selectedSubject">
+                </strong>
+            </p>
+
+            <p>
+                Concept:
+                <strong id="selectedConcept">
+                </strong>
+            </p>
+
+
+            <a href="learn.html"
+               class="continue-button">
+
+                Explore This Concept →
+
+            </a>
+
+        </div>
+
+
+    </main>
+
+
+
+<script>
+
+
+/* =====================================
+   COMPLETE LEARNING DATA
+===================================== */
+
+
+const learningData = {
+
+
+    "CSE": {
+
+
+        "Data Structures & Algorithms": {
+
+            "Arrays": [
+                "Array Basics",
+                "Array Operations",
+                "Array Traversal",
+                "Searching in Arrays",
+                "Sorting Arrays",
+                "Two Pointer Technique",
+                "Prefix Sum",
+                "Common Array Problems"
+            ],
+
+            "Strings": [
+                "String Basics",
+                "String Operations",
+                "String Traversal",
+                "String Searching",
+                "String Matching",
+                "String Manipulation",
+                "Character Frequency",
+                "Common String Problems"
+            ],
+
+            "Linked Lists": [
+                "Linked List Basics",
+                "Singly Linked List",
+                "Doubly Linked List",
+                "Circular Linked List",
+                "Insertion",
+                "Deletion",
+                "Searching",
+                "Reversing a Linked List"
+            ],
+
+            "Stacks & Queues": [
+                "Stack Basics",
+                "Stack Operations",
+                "Queue Basics",
+                "Queue Operations",
+                "Circular Queue",
+                "Deque",
+                "Applications of Stack",
+                "Applications of Queue"
+            ],
+
+            "Trees": [
+                "Tree Terminology",
+                "Binary Trees",
+                "Binary Search Trees",
+                "Tree Traversal",
+                "Preorder Traversal",
+                "Inorder Traversal",
+                "Postorder Traversal",
+                "AVL Trees"
+            ],
+
+            "Graphs": [
+                "Graph Basics",
+                "Graph Representation",
+                "Breadth First Search",
+                "Depth First Search",
+                "Shortest Path",
+                "Dijkstra's Algorithm",
+                "Minimum Spanning Tree",
+                "Graph Applications"
+            ],
+
+            "Sorting": [
+                "Sorting Basics",
+                "Bubble Sort",
+                "Selection Sort",
+                "Insertion Sort",
+                "Merge Sort",
+                "Quick Sort",
+                "Heap Sort",
+                "Sorting Complexity"
+            ],
+
+            "Searching": [
+                "Linear Search",
+                "Binary Search",
+                "Search Space",
+                "Binary Search Variations",
+                "First & Last Occurrence",
+                "Search in Rotated Array"
+            ],
+
+            "Recursion": [
+                "Recursion Basics",
+                "Base Case",
+                "Recursive Case",
+                "Call Stack",
+                "Recursive Algorithms",
+                "Backtracking"
+            ],
+
+            "Dynamic Programming": [
+                "DP Basics",
+                "Overlapping Subproblems",
+                "Optimal Substructure",
+                "Memoization",
+                "Tabulation",
+                "Knapsack",
+                "Longest Common Subsequence"
+            ]
+
+        },
+
+
+        "Object-Oriented Programming": {
+
+            "Classes & Objects": [
+                "Class Basics",
+                "Objects",
+                "Attributes",
+                "Methods",
+                "Constructors"
+            ],
+
+            "Encapsulation": [
+                "Data Hiding",
+                "Access Modifiers",
+                "Getters & Setters"
+            ],
+
+            "Inheritance": [
+                "Inheritance Basics",
+                "Single Inheritance",
+                "Multilevel Inheritance",
+                "Hierarchical Inheritance"
+            ],
+
+            "Polymorphism": [
+                "Polymorphism Basics",
+                "Method Overloading",
+                "Method Overriding",
+                "Runtime Polymorphism"
+            ],
+
+            "Abstraction": [
+                "Abstraction Basics",
+                "Abstract Classes",
+                "Interfaces"
+            ]
+
+        },
+
+
+        "Database Management Systems": {
+
+            "Database Basics": [
+                "Database Concepts",
+                "DBMS Architecture",
+                "Database Models",
+                "Keys",
+                "Constraints"
+            ],
+
+            "SQL": [
+                "SQL Basics",
+                "SELECT",
+                "WHERE",
+                "GROUP BY",
+                "ORDER BY",
+                "JOINs",
+                "Subqueries"
+            ],
+
+            "Normalization": [
+                "Functional Dependency",
+                "1NF",
+                "2NF",
+                "3NF",
+                "BCNF"
+            ],
+
+            "Transactions": [
+                "Transaction Basics",
+                "ACID Properties",
+                "Concurrency",
+                "Deadlocks",
+                "Recovery"
+            ]
+
+        },
+
+
+        "Operating Systems": {
+
+            "Processes": [
+                "Process Basics",
+                "Process States",
+                "Process Control Block",
+                "Context Switching"
+            ],
+
+            "Threads": [
+                "Thread Basics",
+                "Multithreading",
+                "User Threads",
+                "Kernel Threads"
+            ],
+
+            "CPU Scheduling": [
+                "FCFS",
+                "SJF",
+                "Round Robin",
+                "Priority Scheduling",
+                "Scheduling Criteria"
+            ],
+
+            "Memory Management": [
+                "Memory Basics",
+                "Paging",
+                "Segmentation",
+                "Virtual Memory",
+                "Page Replacement"
+            ],
+
+            "Deadlocks": [
+                "Deadlock Basics",
+                "Deadlock Conditions",
+                "Deadlock Prevention",
+                "Deadlock Avoidance",
+                "Banker's Algorithm"
+            ]
+
+        },
+
+
+        "Computer Networks": {
+
+            "Network Basics": [
+                "Network Types",
+                "Network Topologies",
+                "Network Devices",
+                "Protocols"
+            ],
+
+            "OSI Model": [
+                "Seven Layers",
+                "Physical Layer",
+                "Data Link Layer",
+                "Network Layer",
+                "Transport Layer",
+                "Application Layer"
+            ],
+
+            "TCP/IP": [
+                "TCP",
+                "UDP",
+                "IP Addressing",
+                "Ports",
+                "Packets"
+            ],
+
+            "Routing": [
+                "Routing Basics",
+                "Routing Tables",
+                "Distance Vector",
+                "Link State",
+                "Routing Protocols"
+            ]
+
+        }
+
+    },
+
+
+    "CSE-AI": {
+
+
+        "Artificial Intelligence": {
+
+            "Introduction to AI": [
+                "What is AI?",
+                "Types of AI",
+                "AI Applications",
+                "AI Agents"
+            ],
+
+            "Search Algorithms": [
+                "State Space",
+                "Breadth First Search",
+                "Depth First Search",
+                "A* Search",
+                "Heuristics"
+            ],
+
+            "Knowledge Representation": [
+                "Knowledge Basics",
+                "Logic",
+                "Rules",
+                "Semantic Networks"
+            ],
+
+            "Machine Learning Basics": [
+                "Supervised Learning",
+                "Unsupervised Learning",
+                "Reinforcement Learning",
+                "Training Data",
+                "Features",
+                "Labels"
+            ]
+
+        },
+
+
+        "Machine Learning": {
+
+            "Regression": [
+                "Linear Regression",
+                "Multiple Regression",
+                "Cost Function",
+                "Gradient Descent"
+            ],
+
+            "Classification": [
+                "Classification Basics",
+                "Logistic Regression",
+                "Decision Trees",
+                "K-Nearest Neighbors"
+            ],
+
+            "Clustering": [
+                "Clustering Basics",
+                "K-Means",
+                "Hierarchical Clustering",
+                "Cluster Evaluation"
+            ],
+
+            "Model Evaluation": [
+                "Training & Testing",
+                "Accuracy",
+                "Precision",
+                "Recall",
+                "F1 Score",
+                "Confusion Matrix"
+            ]
+
+        },
+
+
+        "Data Structures & Algorithms": {
+
+            "Arrays": [
+                "Array Basics",
+                "Array Operations",
+                "Searching",
+                "Sorting",
+                "Two Pointer Technique"
+            ],
+
+            "Strings": [
+                "String Basics",
+                "String Operations",
+                "String Searching",
+                "String Matching",
+                "String Problems"
+            ],
+
+            "Trees": [
+                "Binary Trees",
+                "Binary Search Trees",
+                "Tree Traversal",
+                "AVL Trees"
+            ],
+
+            "Graphs": [
+                "Graph Basics",
+                "BFS",
+                "DFS",
+                "Shortest Path"
+            ]
+
+        }
+
+    },
+
+
+    "IT": {
+
+
+        "Data Structures & Algorithms": {
+
+            "Arrays": [
+                "Array Basics",
+                "Array Operations",
+                "Searching",
+                "Sorting",
+                "Common Problems"
+            ],
+
+            "Strings": [
+                "String Basics",
+                "String Operations",
+                "String Searching",
+                "String Manipulation",
+                "Common Problems"
+            ],
+
+            "Linked Lists": [
+                "Singly Linked List",
+                "Doubly Linked List",
+                "Insertion",
+                "Deletion",
+                "Reversal"
+            ],
+
+            "Trees": [
+                "Tree Basics",
+                "Binary Trees",
+                "BST",
+                "Tree Traversal"
+            ]
+
+        },
+
+
+        "Web Technologies": {
+
+            "HTML": [
+                "HTML Basics",
+                "Elements",
+                "Attributes",
+                "Forms",
+                "Semantic HTML"
+            ],
+
+            "CSS": [
+                "CSS Basics",
+                "Selectors",
+                "Box Model",
+                "Flexbox",
+                "Grid",
+                "Responsive Design"
+            ],
+
+            "JavaScript": [
+                "JavaScript Basics",
+                "Variables",
+                "Functions",
+                "Arrays",
+                "Objects",
+                "DOM",
+                "Events"
+            ]
+
+        },
+
+
+        "Database Management Systems": {
+
+            "SQL": [
+                "SQL Basics",
+                "SELECT",
+                "WHERE",
+                "JOINs",
+                "GROUP BY",
+                "Subqueries"
+            ],
+
+            "Normalization": [
+                "1NF",
+                "2NF",
+                "3NF",
+                "BCNF"
+            ]
+
+        }
+
+    },
+
+
+    "ECE": {
+
+
+        "Digital Electronics": {
+
+            "Number Systems": [
+                "Binary",
+                "Decimal",
+                "Octal",
+                "Hexadecimal",
+                "Number Conversion"
+            ],
+
+            "Logic Gates": [
+                "AND",
+                "OR",
+                "NOT",
+                "NAND",
+                "NOR",
+                "XOR",
+                "XNOR"
+            ],
+
+            "Boolean Algebra": [
+                "Boolean Laws",
+                "Boolean Expressions",
+                "De Morgan's Laws",
+                "Simplification"
+            ],
+
+            "Combinational Circuits": [
+                "Half Adder",
+                "Full Adder",
+                "Multiplexer",
+                "Demultiplexer",
+                "Encoder",
+                "Decoder"
+            ]
+
+        },
+
+
+        "Signals & Systems": {
+
+            "Signals": [
+                "Continuous Signals",
+                "Discrete Signals",
+                "Periodic Signals",
+                "Energy Signals",
+                "Power Signals"
+            ],
+
+            "Systems": [
+                "System Basics",
+                "Linear Systems",
+                "Time Invariance",
+                "Causality",
+                "Stability"
+            ],
+
+            "Fourier Analysis": [
+                "Fourier Series",
+                "Fourier Transform",
+                "Frequency Domain",
+                "Applications"
+            ]
+
+        },
+
+
+        "Microprocessors & Microcontrollers": {
+
+            "Microprocessor Basics": [
+                "CPU Architecture",
+                "Registers",
+                "Instruction Cycle",
+                "Memory"
+            ],
+
+            "8086": [
+                "8086 Architecture",
+                "Registers",
+                "Addressing Modes",
+                "Instruction Set"
+            ],
+
+            "Microcontrollers": [
+                "Microcontroller Basics",
+                "Embedded Systems",
+                "I/O Ports",
+                "Timers",
+                "Interrupts"
+            ]
+
+        }
+
+    }
+
+};
+
+
+
+/* =====================================
+   CURRENT SELECTION
+===================================== */
+
+
+let selectedBranch = "";
+
+let selectedSubject = "";
+
+let selectedConcept = "";
+
+
+
+/* =====================================
+   SELECT BRANCH
+===================================== */
+
+
+function selectBranch(branch, element) {
+
+
+    selectedBranch = branch;
+
+    selectedSubject = "";
+
+    selectedConcept = "";
+
+
+    document
+        .querySelectorAll(".branch-card")
+        .forEach(card => {
+
+            card.classList.remove("selected");
+
+        });
+
+
+    element.classList.add("selected");
+
+
+    const subjects =
+        Object.keys(
+            learningData[branch]
+        );
+
+
+    const subjectGrid =
+        document.getElementById("subjectGrid");
+
+
+    subjectGrid.innerHTML = "";
+
+
+    subjects.forEach(subject => {
+
+
+        const card =
+            document.createElement("div");
+
+
+        card.className =
+            "subject-card";
+
+
+        card.innerHTML = `
+
+            <h3>${subject}</h3>
+
+            <p>
+                Explore important concepts
+                and build your understanding.
+            </p>
+
+        `;
+
+
+        card.onclick =
+            () => selectSubject(subject, card);
+
+
+        subjectGrid.appendChild(card);
+
+    });
+
+
+    document
+        .getElementById("subjectSection")
+        .classList.add("show");
+
+
+    document
+        .getElementById("conceptSection")
+        .classList.remove("show");
+
+
+    document
+        .getElementById("selectedInfo")
+        .classList.remove("show");
+
+}
+
+
+
+/* =====================================
+   SELECT SUBJECT
+===================================== */
+
+
+function selectSubject(subject, element) {
+
+
+    selectedSubject = subject;
+
+    selectedConcept = "";
+
+
+    document
+        .querySelectorAll(".subject-card")
+        .forEach(card => {
+
+            card.classList.remove("selected");
+
+        });
+
+
+    element.classList.add("selected");
+
+
+    const concepts =
+        Object.keys(
+            learningData[selectedBranch][selectedSubject]
+        );
+
+
+    const conceptGrid =
+        document.getElementById("conceptGrid");
+
+
+    conceptGrid.innerHTML = "";
+
+
+    concepts.forEach(concept => {
+
+
+        const subtopics =
+            learningData
+                [selectedBranch]
+                [selectedSubject]
+                [concept];
+
+
+        const card =
+            document.createElement("div");
+
+
+        card.className =
+            "concept-card";
+
+
+        card.innerHTML = `
+
+            <h3>${concept}</h3>
+
+            <p>
+                ${subtopics.length}
+                learning topics to explore
+            </p>
+
+        `;
+
+
+        card.onclick =
+            () => selectConcept(concept, card);
+
+
+        conceptGrid.appendChild(card);
+
+    });
+
+
+    document
+        .getElementById("conceptSection")
+        .classList.add("show");
+
+
+    document
+        .getElementById("selectedInfo")
+        .classList.remove("show");
+
+}
+
+
+
+/* =====================================
+   SELECT CONCEPT
+===================================== */
+
+
+function selectConcept(concept, element) {
+
+
+    selectedConcept = concept;
+
+
+    document
+        .querySelectorAll(".concept-card")
+        .forEach(card => {
+
+            card.style.borderColor =
+                "transparent";
+
+        });
+
+
+    element.style.borderColor =
+        "#8B6B91";
+
+
+    document
+        .getElementById("selectedBranch")
+        .textContent =
+        selectedBranch;
+
+
+    document
+        .getElementById("selectedSubject")
+        .textContent =
+        selectedSubject;
+
+
+    document
+        .getElementById("selectedConcept")
+        .textContent =
+        selectedConcept;
+
+
+    document
+        .getElementById("selectedInfo")
+        .classList.add("show");
+
+
+    /* Save selection */
+
+    localStorage.setItem(
+        "conceptLensSelection",
+        JSON.stringify({
+
+            branch: selectedBranch,
+
+            subject: selectedSubject,
+
+            concept: selectedConcept
+
+        })
+    );
+
+}
+
+</script>
+
+
+</body>
+
+</html>
